@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+task client(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    main = 'client.ClientSchnittstelle'
+}
+
+task server(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    main = 'server.ServerSchnittstelle'
+}
+
+group 'mwusitnger'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
