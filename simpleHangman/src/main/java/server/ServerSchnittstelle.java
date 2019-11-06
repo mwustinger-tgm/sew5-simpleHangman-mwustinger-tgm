@@ -40,10 +40,10 @@ public class ServerSchnittstelle{
     public ServerSchnittstelle(String[] args) {
         if (args.length >=1) this.host = args[0];
         if (args.length >=2) this.port = Integer.parseInt(args[1]);
-        HangmanModel.initBasicWords();
     }
 
     public static void main(String[] args) {
+        System.out.println(args.length==0?"Keine Argumente uebergeben":args[0]);
         ServerSchnittstelle ss = new ServerSchnittstelle(args);
         ss.run();
     }
@@ -132,6 +132,8 @@ class ClientWorker implements Runnable {
                             shutdown();
                         else if (message.startsWith("!SHUTDOWN"))
                             callback.shutdown();
+                        else
+                            send("Invalid Command!");
                     } else {
                         if (message.length() == 1) {
                             hangman.replaceCharInWord(message.charAt(0));

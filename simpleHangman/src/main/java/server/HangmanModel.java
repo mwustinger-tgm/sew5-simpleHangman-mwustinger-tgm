@@ -1,6 +1,10 @@
 package server;
 
 
+import fileworker.FileWorker;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,33 +14,29 @@ public class HangmanModel {
     private boolean alreadyWon = false;
     private boolean alreadyLost = false;
     private int tries = 10;
-    private static List<String> words = new ArrayList<>();
+    private List<String> words = new ArrayList<>();
 
     public HangmanModel (int tries, String word) {
         this.tries = tries;
+        this.words = FileWorker.getWords();
         if (word == null) this.word = getRandomWord();
         for (int i = 0; i < this.word.length(); i++) {
             currentWord += "_";
         }
     }
-    public static String getRandomWord() {
+    public String getRandomWord() {
         int index = (int)(Math.random()*words.size());
         return words.get(index);
     }
-    public static void addWord(String word) {
+    public void addWord(String word) {
         if (word!=null)
             words.add(word.toUpperCase());
     }
-    public static void removeWord(String word) {
+    public void removeWord(String word) {
         for(String e: words) {
             if (e.equals(word))
                 words.remove(e);
         }
-    }
-    public static void initBasicWords() {
-        addWord("Hallo");
-        addWord("Test");
-        addWord("Martin");
     }
     public static String replaceCharInWord(String searchedWord, String currentWord, char c) {
         StringBuilder word = new StringBuilder(currentWord);
@@ -104,5 +104,13 @@ public class HangmanModel {
 
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public List<String> getWords() {
+        return words;
+    }
+
+    public void setWords(List<String> words) {
+        this.words = words;
     }
 }
