@@ -1,6 +1,8 @@
 package server;
 
 
+import fileworker.FileWorker;
+
 import javax.print.DocFlavor;
 
 import static java.util.logging.Level.*;
@@ -110,6 +112,8 @@ class ClientWorker implements Runnable {
     private HangmanModel hangman;
     private boolean listening = true;
 
+    private String name = null;
+
     ClientWorker(Socket client, ServerSchnittstelle callback) throws IOException {
         this.client = client;
         this.callback = callback;
@@ -120,38 +124,44 @@ class ClientWorker implements Runnable {
 
     @Override
     public void run() {
-        send(hangman.getTries()+" remaining tries. "+hangman.getCurrentWord());
+        send("What's your name for Highscore purposes!");
         send("!ACCEPT");
         while(listening){
             try{
                 String message = in.readLine();
                 if(message != null && !message.equals("")) {
-                    message = message.toUpperCase();
-                    if (message.startsWith("!")){
-                        if (message.startsWith("!EXIT"))
-                            shutdown();
-                        else if (message.startsWith("!SHUTDOWN"))
-                            callback.shutdown();
-                        else
-                            send("Invalid Command!");
+                    if (name == null) {
+                        name = message;
+                        send(hangman.getTries()+" remaining tries. "+hangman.getCurrentWord());
+                        send("!ACCEPT");
                     } else {
-                        if (message.length() == 1) {
-                            hangman.replaceCharInWord(message.charAt(0));
+                        message = message.toUpperCase();
+                        if (message.startsWith("!")) {
+                            if (message.startsWith("!EXIT"))
+                                shutdown();
+                            else if (message.startsWith("!SHUTDOWN"))
+                                callback.shutdown();
+                            else
+                                send("Invalid Command!");
                         } else {
-                            hangman.checkIfRightWord(message);
-                        }
-                        if (hangman.isAlreadyWon()) {
-                            send("You Won!");
-                            shutdown();
-                        } else if (hangman.isAlreadyLost()){
-                            send("You lose. The word was: "+hangman.getWord());
-                            shutdown();
-                        } else {
-                            send(hangman.getTries()+" remaining tries. "+hangman.getCurrentWord());
-                            send("!ACCEPT");
+                            if (message.length() == 1) {
+                                hangman.replaceCharInWord(message.charAt(0));
+                            } else {
+                                hangman.checkIfRightWord(message);
+                            }
+                            if (hangman.isAlreadyWon()) {
+                                send("You Won!");
+                                FileWorker.setHighscore(name, hangman.getTries());
+                                shutdown();
+                            } else if (hangman.isAlreadyLost()) {
+                                send("You lose. The word was: " + hangman.getWord());
+                                shutdown();
+                            } else {
+                                send(hangman.getTries() + " remaining tries. " + hangman.getCurrentWord());
+                                send("!ACCEPT");
+                            }
                         }
                     }
-
                 }
             } catch (IOException e) {
                 // e.printStackTrace();
