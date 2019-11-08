@@ -22,6 +22,10 @@ public class ClientSchnittstelle{
 
     Scanner scannerIn = new Scanner(System.in);
 
+    /**
+     * Erstellt eine neue Client Schnittstelle
+     * @param args die Argumente der Main-Methode
+     */
     public ClientSchnittstelle(String[] args) {
         if (args.length >=1) this.host = args[0];
         if (args.length >=2) this.port = Integer.parseInt(args[1]);
@@ -32,6 +36,9 @@ public class ClientSchnittstelle{
         cs.run();
     }
 
+    /**
+     * Wartet auf Nachrichten vom Server
+     */
     public void run() {
         try {
             socket = new Socket(this.host, this.port);
@@ -64,10 +71,17 @@ public class ClientSchnittstelle{
         }
     }
 
+    /**
+     * Sendet eine Nachricht
+     * @param message die Nachricht
+     */
     public void send(String message) {
         out.println(message);
     }
 
+    /**
+     * Beendet die Schnittstelle
+     */
     public void shutdown() {
         listening = false;
         try {

@@ -39,6 +39,10 @@ public class ServerSchnittstelle{
     private List<ClientWorker> workerList = new ArrayList<>();
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
+    /**
+     * Erzeugt neu Server-Schnittstelle
+     * @param args die Argumente der Main-Methode
+     */
     public ServerSchnittstelle(String[] args) {
         if (args.length >=1) this.host = args[0];
         if (args.length >=2) this.port = Integer.parseInt(args[1]);
@@ -122,6 +126,9 @@ class ClientWorker implements Runnable {
         this.in = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
 
+    /**
+     * Wartet auf Nachrichten vom Client
+     */
     @Override
     public void run() {
         send("What's your name for Highscore purposes!");
@@ -169,6 +176,9 @@ class ClientWorker implements Runnable {
         }
     }
 
+    /**
+     * Schließt die Schnittstelle
+     */
     void shutdown() {
         listening = false;
         send("!EXIT");

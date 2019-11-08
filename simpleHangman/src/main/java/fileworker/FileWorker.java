@@ -9,10 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Worker-Klasse welche Methoden für den Filezugriff bereitstellt
+ */
 public class FileWorker {
-    public static void main(String[] args) {
-        FileWorker.setHighscore("Martin", 3);
-    }
+
+    /**
+     * Holt alle Wörter aus dem Listen-File
+     * @return die Wörter
+     */
     public static List<String> getWords() {
         List<String> l = new ArrayList<>();
         try {
@@ -30,6 +35,11 @@ public class FileWorker {
         return l;
     }
 
+    /**
+     * Setzt einen neuen Highscore ins File
+     * @param name des Spielers
+     * @param remainingTries den Score
+     */
     public static synchronized void setHighscore(String name, int remainingTries) {
         try {
             List<String> scores = new ArrayList<>();

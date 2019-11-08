@@ -1,0 +1,9 @@
+-classpath 'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\build\\classes\\java\\main;D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\build\\resources\\main;C:\\Users\\mwust\\.gradle\\caches\\modules-2\\files-2.1\\commons-io\\commons-io\\2.6\\815893df5f31da2ece4040fe0a12fd44b577afaf\\commons-io-2.6.jar'
+-d 'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\build\\docs\\javadoc'
+-doctitle 'simpleHangman 1.0-SNAPSHOT API'
+-quiet 
+-windowtitle 'simpleHangman 1.0-SNAPSHOT API'
+'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\src\\main\\java\\client\\ClientSchnittstelle.java'
+'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\src\\main\\java\\fileworker\\FileWorker.java'
+'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\src\\main\\java\\server\\HangmanModel.java'
+'D:\\Daten\\Schule\\TGM\\TGM 5AHIT\\GIT-Repos\\sew5-simpleHangman-mwustinger-tgm\\simpleHangman\\src\\main\\java\\server\\ServerSchnittstelle.java'
